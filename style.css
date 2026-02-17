@@ -342,3 +342,99 @@
 .join-btn:hover {
   box-shadow: 0 0 25px #ff9933;
 }
+/* ================= MOBILE MASTER FIX ================= */
+
+/* prevent horizontal scroll */
+html,body{
+  max-width:100%;
+  overflow-x:hidden;
+}
+
+/* FIX HERO SLIDER (MOST IMPORTANT) */
+.hero-track img{
+  width:100%;
+  min-width:100%;
+}
+
+@keyframes scrollHero {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-300%); }
+}
+
+/* HEADER MOBILE FIX */
+@media (max-width:768px){
+
+  .header-top{
+    flex-direction:column;
+    text-align:center;
+    padding:12px 10px;
+  }
+
+  .logo-area{
+    gap:12px;
+    justify-content:center;
+  }
+
+  .logo-area img{
+    width:90px;
+    height:90px;
+  }
+
+  .title-area h1{
+    font-size:22px;
+    line-height:1.2;
+  }
+
+  .title-area h2{
+    font-size:18px;
+  }
+
+  .nav{
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+  }
+
+  .nav a{
+    font-size:13px;
+    padding:6px 10px;
+  }
+
+  .hero-slider{
+    height:240px;
+  }
+
+  .hero-track img{
+    height:240px;
+    object-fit:cover;
+  }
+
+}
+
+/* SMALL PHONE */
+@media (max-width:480px){
+
+  .section-title,
+  .photo-title{
+    font-size:24px;
+  }
+
+  .about-container{
+    padding:20px;
+  }
+
+  .about-container p{
+    font-size:15px;
+    text-align:left;
+  }
+
+  .member-card{
+    padding:18px 14px;
+  }
+
+  .member-card img{
+    width:90px;
+    height:90px;
+  }
+
+}
