@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>सहयोग राशि | YSS India</title>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#0b2c5d,#1c5cb8);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:500px;
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.logo img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid #ff6b00;
+}
+
+h1{
+    text-align:center;
+    color:#0b2c5d;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
+
+.input-group{
+    margin-bottom:15px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:bold;
+}
+
+.input-group input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.amount-buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin:15px 0;
+}
+
+.amount-buttons button{
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#eef3ff;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.amount-buttons button:hover{
+    background:#ff6b00;
+    color:white;
+}
+
+.pay-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#ff6b00;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.pay-btn:hover{
+    background:#e55c00;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <img src="YSS-Logo.jpg" alt="YSS India Logo">
+    </div>
+
+    <h1>सहयोग राशि</h1>
+
+    <p class="subtitle">
+        समाज सेवा कार्यों हेतु अपनी इच्छानुसार सहयोग राशि प्रदान करें।
+    </p>
+
+    <div class="input-group">
+        <label>पूरा नाम</label>
+        <input type="text" id="name" placeholder="अपना नाम दर्ज करें">
+    </div>
+
+    <div class="input-group">
+        <label>मोबाइल नंबर</label>
+        <input type="tel" id="mobile" placeholder="मोबाइल नंबर">
+    </div>
+
+    <div class="input-group">
+        <label>सहयोग राशि (₹)</label>
+        <input type="number" id="amount" placeholder="राशि दर्ज करें">
+    </div>
+
+    <div class="amount-buttons">
+        <button onclick="setAmount(51)">₹51</button>
+        <button onclick="setAmount(101)">₹101</button>
+        <button onclick="setAmount(501)">₹501</button>
+        <button onclick="setAmount(1100)">₹1100</button>
+    </div>
+
+    <button class="pay-btn" onclick="payNow()">
+        सहयोग करें
+    </button>
+
+</div>
+
+<script>
+
+function setAmount(value){
+    document.getElementById("amount").value = value;
+}
+
+function payNow(){
+
+    let amount = document.getElementById("amount").value;
+
+    if(amount == "" || amount < 1){
+        alert("कृपया सहयोग राशि दर्ज करें");
+        return;
+    }
+
+    var options = {
+
+        key: "rzp_test_T0aFB2EyePrn4K",
+
+        amount: amount * 100,
+
+        currency: "INR",
+
+        name: "YSS India",
+
+        description: "सहयोग राशि",
+
+        prefill: {
+            name: document.getElementById("name").value,
+            contact: document.getElementById("mobile").value
+        },
+
+        handler: function(response){
+
+            alert(
+                "धन्यवाद!\n\nPayment Successful\n\nPayment ID: "
+                + response.razorpay_payment_id
+            );
+
+        },
+
+        theme: {
+            color: "#ff6b00"
+        }
+    };
+
+    var rzp = new Razorpay(options);
+    rzp.open();
+}
+
+</script>
+
+</body>
+</html>
