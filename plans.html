@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>सदस्यता योजना | YSS India</title>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    padding:30px;
+}
+
+h1{
+    text-align:center;
+    color:#0d47a1;
+    margin-bottom:30px;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.plan{
+    width:300px;
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+.plan h2{
+    color:#0d47a1;
+}
+
+.price{
+    font-size:40px;
+    font-weight:bold;
+    color:#ff6b00;
+    margin:15px 0;
+}
+
+.btn{
+    width:100%;
+    background:#0d47a1;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.btn:hover{
+    background:#1565c0;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>सदस्यता योजना चुनें</h1>
+
+<div class="container">
+
+```
+<div class="plan">
+    <h2>Basic Member</h2>
+    <div class="price">₹51</div>
+    <p>साधारण सदस्यता</p>
+    <button class="btn"
+    onclick="payNow('Basic Member',51)">
+        सदस्य बनें
+    </button>
+</div>
+
+<div class="plan">
+    <h2>Active Member</h2>
+    <div class="price">₹101</div>
+    <p>सक्रिय सदस्यता</p>
+    <button class="btn"
+    onclick="payNow('Active Member',101)">
+        सदस्य बनें
+    </button>
+</div>
+
+<div class="plan">
+    <h2>Lifetime Member</h2>
+    <div class="price">₹501</div>
+    <p>आजीवन सदस्यता</p>
+    <button class="btn"
+    onclick="payNow('Lifetime Member',501)">
+        सदस्य बनें
+    </button>
+</div>
+```
+
+</div>
+
+<script>
+
+function payNow(plan, amount){
+
+    var options = {
+
+        key: "rzp_test_T0aFB2EyePrn4K",
+
+        amount: amount * 100,
+
+        currency: "INR",
+
+        name: "YSS India",
+
+        description: plan,
+
+        handler: function(response){
+
+            alert(
+                "भुगतान सफल हुआ!\n\nPayment ID: "
+                + response.razorpay_payment_id
+            );
+
+            // Payment Success Page
+            window.location.href =
+            "success.html?payment_id=" +
+            response.razorpay_payment_id;
+        },
+
+        theme:{
+            color:"#0d47a1"
+        }
+    };
+
+    var rzp = new Razorpay(options);
+    rzp.open();
+}
+
+</script>
+
+</body>
+</html>
